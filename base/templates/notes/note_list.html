@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Your Notes</h2>
+<a href="{% url 'add_note' %}" class="btn btn-success mb-3">Add Note</a>
+<ul class="list-group">
+    {% for note in notes %}
+    <li class="list-group-item d-flex justify-content-between">
+        <div>
+            <strong>{{ note.title }}</strong> - {{ note.content|truncatewords:20 }}
+        </div>
+        <div>
+            <a href="{% url 'update_note' note.id %}" class="btn btn-sm btn-warning me-1">Edit</a>
+            <a href="{% url 'delete_note' note.id %}" class="btn btn-sm btn-danger">Delete</a>
+        </div>
+        
+    </li>
+    {% empty %}
+    <li class="list-group-item">No notes found.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

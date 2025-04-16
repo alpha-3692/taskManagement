@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <title>Taskly - {% block title %}{% endblock %}</title>
+        
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        
+        <style>
+            :root {
+                --primary: #7209b7;
+                --primary-dark: #560bad;
+                --primary-light: #b5179e;
+                --secondary: #480ca8;
+                --accent: #f72585;
+                --success: #4cc9f0;
+                --dark: #2b2d42;
+                --light: #f8f9fa;
+                --gray: #6c757d;
+                --gradient: linear-gradient(135deg, #7209b7, #560bad, #480ca8, #3a0ca3, #3f37c9, #4361ee, #4895ef, #4cc9f0);
+                --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.05);
+                --shadow-md: 0 10px 15px rgba(0, 0, 0, 0.07);
+                --shadow-lg: 0 20px 25px rgba(0, 0, 0, 0.1);
+            }
+            
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            
+            body {
+                font-family: 'Nunito', sans-serif;
+                background-color: #f5f7fd;
+                color: var(--dark);
+                line-height: 1.6;
+                overflow-x: hidden;
+            }
+            
+            h1, h2, h3, h4, h5, h6 {
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 600;
+            }
+            
+            .navbar {
+                background: var(--gradient) !important;
+                padding: 1.2rem 2.5rem;
+                box-shadow: var(--shadow-md);
+                position: relative;
+                z-index: 100;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .navbar::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 100%;
+                background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.05' d='M0,224L60,213.3C120,203,240,181,360,181.3C480,181,600,203,720,197.3C840,192,960,160,1080,165.3C1200,171,1320,213,1380,234.7L1440,256L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z'%3E%3C/path%3E%3C/svg%3E") no-repeat bottom;
+                z-index: -1;
+            }
+            
+            .navbar-brand-section {
+                display: flex;
+                align-items: center;
+            }
+            
+            .navbar-actions {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .navbar a.brand {
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 700;
+                font-size: 2.2rem;
+                color: white !important;
+                text-decoration: none;
+                transition: all 0.4s ease;
+                letter-spacing: 1px;
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            }
+            
+            .navbar a.brand:hover {
+                transform: translateY(-3px) scale(1.02);
+                text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            }
+            
+            .navbar .welcome-text {
+                color: white;
+                font-weight: 500;
+                margin-left: 1.5rem;
+                opacity: 0.95;
+                letter-spacing: 0.5px;
+                position: relative;
+                padding-left: 1.2rem;
+            }
+            
+            .navbar .welcome-text::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                height: 24px;
+                width: 3px;
+                background-color: rgba(255, 255, 255, 0.7);
+                border-radius: 4px;
+            }
+            
+            .btn-new-task {
+                background-color: white;
+                color: var(--primary);
+                font-weight: 600;
+                border-radius: 50px;
+                padding: 0.7rem 1.8rem;
+                border: none;
+                box-shadow: var(--shadow-md);
+                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                font-size: 0.95rem;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                text-decoration: none;
+                height: 44px;
+            }
+            
+            .btn-new-task:hover {
+                transform: translateY(-4px);
+                box-shadow: var(--shadow-lg);
+                background-color: white;
+                color: var(--accent);
+            }
+            
+            .btn-logout {
+                background: transparent;
+                color: white;
+                border: 2px solid rgba(255, 255, 255, 0.8);
+                border-radius: 50px;
+                padding: 0.7rem 1.8rem;
+                font-weight: 600;
+                transition: all 0.3s ease;
+                font-size: 0.95rem;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                height: 44px;
+            }
+            
+            .btn-logout:hover {
+                background-color: rgba(255, 255, 255, 0.15);
+                border-color: white;
+                transform: translateY(-2px);
+            }
+            
+            .login-link {
+                color: white !important;
+                font-weight: 600;
+                text-decoration: none;
+                padding: 0.7rem 1.8rem;
+                border: 2px solid rgba(255, 255, 255, 0.8);
+                border-radius: 50px;
+                transition: all 0.3s ease;
+                font-size: 0.95rem;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                height: 44px;
+            }
+            
+            .login-link:hover {
+                background-color: rgba(255, 255, 255, 0.15);
+                border-color: white;
+                transform: translateY(-2px);
+            }
+            
+            .main-container {
+                max-width: 1200px;
+                margin: 3rem auto;
+                background-color: white;
+                border-radius: 16px;
+                box-shadow: var(--shadow-md);
+                padding: 2.5rem;
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .main-container::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 150px;
+                height: 150px;
+                background: var(--gradient);
+                opacity: 0.1;
+                border-radius: 0 0 0 100%;
+            }
+            
+            .main-container::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100px;
+                height: 100px;
+                background: var(--gradient);
+                opacity: 0.07;
+                border-radius: 0 100% 0 0;
+            }
+            
+            /* Form styles */
+            form {
+                margin: 25px 0;
+            }
+            
+            .form-group {
+                margin-bottom: 1.5rem;
+            }
+            
+            form input,
+            form select,
+            form textarea {
+                width: 100%;
+                padding: 0.9rem 1.2rem;
+                margin: 8px 0;
+                border: 1px solid #e6e8eb;
+                border-radius: 10px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+                transition: all 0.3s ease;
+                font-family: 'Nunito', sans-serif;
+                color: var(--dark);
+            }
+            
+            form input:focus,
+            form select:focus,
+            form textarea:focus {
+                border-color: var(--primary-light);
+                box-shadow: 0 0 0 4px rgba(114, 9, 183, 0.1);
+                outline: none;
+            }
+            
+            form label {
+                font-weight: 600;
+                color: var(--dark);
+                margin-bottom: 0.6rem;
+                display: block;
+                font-size: 0.95rem;
+            }
+            
+            form input[type="submit"]:not(.no-global-style) {
+                background: var(--gradient) !important;
+                color: white;
+                padding: 0.9rem 2rem;
+                border: none;
+                border-radius: 10px;
+                cursor: pointer;
+                margin: 20px 0 10px;
+                font-weight: 700;
+                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                box-shadow: 0 4px 15px rgba(114, 9, 183, 0.3);
+                font-size: 1rem;
+                letter-spacing: 0.5px;
+            }
+            
+            form input[type="submit"]:not(.no-global-style):hover {
+                transform: translateY(-4px) scale(1.01);
+                box-shadow: 0 8px 20px rgba(114, 9, 183, 0.4);
+            }
+            
+            form input[type="submit"]:not(.no-global-style):active {
+                transform: translateY(-2px);
+            }
+            
+            /* CKEditor styles */
+            .django-ckeditor-widget {
+                width: 100%;
+            }
+            
+            /* Card styling for task items */
+            .card {
+                border-radius: 16px;
+                border: none;
+                box-shadow: var(--shadow-sm);
+                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                margin-bottom: 1.8rem;
+                overflow: hidden;
+                position: relative;
+                background-color: white;
+            }
+            
+            .card:hover {
+                transform: translateY(-6px);
+                box-shadow: var(--shadow-md);
+            }
+            
+            .card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 4px;
+                background: var(--gradient);
+            }
+            
+            .card-header {
+                background-color: #fafbff;
+                border-bottom: 1px solid #f0f2f5;
+                font-weight: 700;
+                font-size: 1.1rem;
+                padding: 1.2rem 1.5rem;
+                color: var(--primary-dark);
+            }
+            
+            .card-body {
+                padding: 1.8rem;
+            }
+            
+            /* Task status badge styling */
+            .badge {
+                padding: 0.5rem 1rem;
+                border-radius: 50px;
+                font-weight: 600;
+                font-size: 0.8rem;
+                letter-spacing: 0.5px;
+            }
+            
+            .badge-pending {
+                background-color: #ffedd5;
+                color: #9a3412;
+            }
+            
+            .badge-progress {
+                background-color: #e0f2fe;
+                color: #0369a1;
+            }
+            
+            .badge-complete {
+                background-color: #dcfce7;
+                color: #166534;
+            }
+            
+            /* Animation for page transitions */
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(30px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            
+            .content-wrapper {
+                animation: fadeIn 0.6s ease-out forwards;
+            }
+            
+            /* Empty state styling */
+            .empty-state {
+                text-align: center;
+                padding: 3rem 1rem;
+            }
+            
+            .empty-state i {
+                font-size: 4rem;
+                color: #d1d5db;
+                margin-bottom: 1.5rem;
+            }
+            
+            .empty-state h3 {
+                color: var(--dark);
+                margin-bottom: 1rem;
+            }
+            
+            .empty-state p {
+                color: var(--gray);
+                max-width: 500px;
+                margin: 0 auto 1.5rem;
+            }
+            
+            /* Footer styling */
+            footer {
+                background-color: white;
+                padding: 2rem 0;
+                text-align: center;
+                margin-top: 3rem;
+                border-top: 1px solid #f0f2f5;
+            }
+            
+            footer p {
+                color: var(--gray);
+                font-size: 0.9rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .footer-links {
+                display: flex;
+                justify-content: center;
+                gap: 1.5rem;
+                margin-top: 1rem;
+            }
+            
+            .footer-links a {
+                color: var(--primary);
+                text-decoration: none;
+                font-weight: 500;
+                transition: all 0.3s ease;
+            }
+            
+            .footer-links a:hover {
+                color: var(--accent);
+            }
+
+            /* Buttons & action links */
+            .btn-action {
+                padding: 0.6rem 1.2rem;
+                border-radius: 8px;
+                font-weight: 600;
+                font-size: 0.9rem;
+                transition: all 0.3s ease;
+                text-decoration: none;
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .btn-primary {
+                background-color: var(--primary);
+                color: white;
+                box-shadow: 0 4px 10px rgba(114, 9, 183, 0.2);
+            }
+
+            .btn-primary:hover {
+                background-color: var(--primary-dark);
+                transform: translateY(-2px);
+                box-shadow: 0 6px 15px rgba(114, 9, 183, 0.3);
+                color: white;
+            }
+
+            .btn-secondary {
+                background-color: #f3f4f6;
+                color: var(--dark);
+            }
+
+            .btn-secondary:hover {
+                background-color: #e5e7eb;
+                transform: translateY(-2px);
+                color: var(--dark);
+            }
+
+            .btn-danger {
+                background-color: #fee2e2;
+                color: #b91c1c;
+            }
+
+            .btn-danger:hover {
+                background-color: #fecaca;
+                color: #991b1b;
+                transform: translateY(-2px);
+            }
+
+            /* Task priority indicators */
+            .priority-dot {
+                display: inline-block;
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                margin-right: 8px;
+            }
+
+            .priority-high {
+                background-color: #ef4444;
+            }
+
+            .priority-medium {
+                background-color: #f59e0b;
+            }
+
+            .priority-low {
+                background-color: #10b981;
+            }
+            
+            /* Fix for form within navbar */
+            .navbar form {
+                margin: 0;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <nav class="navbar">
+            <div class="navbar-brand-section">
+                <a href="{% url 'tasks' %}" class="brand">Taskly</a>
+                {% if request.user.is_authenticated %}
+                <span class="welcome-text">
+                    Hi, {% if request.user.first_name %}{{ request.user.first_name }}{% else %}{{ request.user.username }}{% endif %}!
+                </span>
+                {% endif %}
+            </div>
+            <div class="navbar-actions">
+                {% if request.user.is_authenticated %}
+                <a href="{% url 'add-new' %}" class="btn-new-task">
+                    <i class="fas fa-plus me-2"></i> New Task
+                </a>
+                <a href="{% url 'add_note' %}" class="btn-new-task">
+                    <i class="fas fa-sticky-note me-2"></i> Add Note
+                </a>
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-logout">
+                        <i class="fas fa-sign-out-alt me-2"></i> Logout
+                    </button>
+                </form>
+                {% else %}
+                <a class="login-link" href="{% url 'login' %}">
+                    <i class="fas fa-sign-in-alt me-2"></i> Login
+                </a>
+                {% endif %}
+            </div>
+        </nav>
+        
+        <div class="main-container">
+            <div class="content-wrapper">
+                {% block content %}
+                <!-- Example content for preview -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h2 class="mb-4">My Tasks</h2>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="priority-dot priority-high"></span>
+                                    Project Planning
+                                </div>
+                                <span class="badge badge-pending">Pending</span>
+                            </div>
+                            <div class="card-body">
+                                <p>Create project timeline and resource allocation for the new marketing campaign.</p>
+                                <div class="d-flex justify-content-between align-items-center mt-4">
+                                    <small class="text-muted">Due: Apr 20, 2025</small>
+                                    <div>
+                                        <a href="#" class="btn-action btn-secondary me-2">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </a>
+                                        <a href="#" class="btn-action btn-primary">
+                                            <i class="fas fa-check"></i> Complete
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="priority-dot priority-medium"></span>
+                                    Email Follow-up
+                                </div>
+                                <span class="badge badge-progress">In Progress</span>
+                            </div>
+                            <div class="card-body">
+                                <p>Send follow-up emails to potential clients from last week's conference.</p>
+                                <div class="d-flex justify-content-between align-items-center mt-4">
+                                    <small class="text-muted">Due: Apr 18, 2025</small>
+                                    <div>
+                                        <a href="#" class="btn-action btn-secondary me-2">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </a>
+                                        <a href="#" class="btn-action btn-primary">
+                                            <i class="fas fa-check"></i> Complete
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="priority-dot priority-low"></span>
+                                    Weekly Report
+                                </div>
+                                <span class="badge badge-complete">Completed</span>
+                            </div>
+                            <div class="card-body">
+                                <p>Compile and submit weekly progress report to the management team.</p>
+                                <div class="d-flex justify-content-between align-items-center mt-4">
+                                    <small class="text-muted">Completed: Apr 14, 2025</small>
+                                    <div>
+                                        <a href="#" class="btn-action btn-danger">
+                                            <i class="fas fa-trash"></i> Delete
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endblock %}
+            </div>
+        </div>
+        
+        {% comment %} <footer>
+            <div class="container">
+                <p>© 2025 Taskly - Organize your tasks efficiently</p>
+                
+            </div>
+        </footer> {% endcomment %}
+    </body>
+</html>

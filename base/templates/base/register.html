@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow">
+            <div class="card-body p-4">
+                <h1 class="card-title text-center mb-4">Create Account</h1>
+                
+                <form action="" method="post">
+                    {% csrf_token %}
+                    
+                    {% for field in form %}
+                    <div class="mb-3">
+                        <label for="{{ field.id_for_label }}" class="form-label fw-bold">
+                            {{ field.label }}{% if field.field.required %}<span class="text-danger">*</span>{% endif %}
+                        </label>
+                        
+                        {% if field.errors %}
+                            <div class="has-error">
+                                {{ field }}
+                                <div class="text-danger mt-1">
+                                    {% for error in field.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% else %}
+                            {{ field }}
+                        {% endif %}
+                        
+                        {% if field.help_text %}
+                            <small class="form-text text-muted">{{ field.help_text|safe }}</small>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                    
+                    <div class="d-grid gap-2 mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg register-btn">Register</button>
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                        <p class="mb-0">
+                            Already have an account? 
+                            <a href="{% url 'login' %}" class="text-decoration-none">Sign in</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Custom styles that don't conflict with base.html */
+    .card {
+        border-radius: 10px;
+        border: none;
+    }
+    
+    .card-title {
+        color: #333;
+        font-weight: 700;
+    }
+    
+    /* Apply Bootstrap form-control class styling manually */
+    .card input[type="text"],
+    .card input[type="email"],
+    .card input[type="password"],
+    .card input[type="number"],
+    .card select,
+    .card textarea {
+        display: block;
+        width: 100%;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+        background-color: #f8f9fa;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+    
+    .card input[type="text"]:focus,
+    .card input[type="email"]:focus,
+    .card input[type="password"]:focus,
+    .card input[type="number"]:focus,
+    .card select:focus,
+    .card textarea:focus {
+        border-color: #80bdff;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        background-color: #fff;
+        outline: 0;
+    }
+    
+    /* Style for checkboxes - more specific than base.html styles */
+    .card input[type="checkbox"] {
+        width: auto;
+        margin-right: 8px;
+    }
+    
+    /* Style specific to the registration button to avoid conflicts */
+    .card .register-btn {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+        transition: all 0.3s ease;
+        color: white;
+        font-weight: 500;
+        text-align: center;
+    }
+    
+    .card .register-btn:hover {
+        background-color: #0b5ed7;
+        border-color: #0a58ca;
+    }
+    
+    /* Override any base.html form styling */
+    .card form input[type="submit"] {
+        display: none; /* Hide any submit inputs and use the button instead */
+    }
+</style>
+{% endblock %}

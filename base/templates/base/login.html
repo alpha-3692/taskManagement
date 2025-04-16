@@ -1,0 +1,872 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Taskly{% endblock %}
+{% load static %}
+{% block content %}
+
+<main class="taskly-app">
+    <!-- Hero Section -->
+    <section class="hero animate-fade-in">
+        <div class="container">
+            <h1 class="hero-title animate-slide-up">A simple to-do list to <span class="accent">manage it all</span></h1>
+            <p class="hero-subtitle animate-slide-up" style="animation-delay: 0.2s">Easily manage your personal tasks, family projects, and team work – all in one place.</p>
+            <p class="hero-tagline animate-slide-up" style="animation-delay: 0.4s">FREE FOREVER. NO CREDIT CARD.</p>
+        </div>
+    </section>
+
+    <!-- Login Form -->
+    <section class="login-section">
+        <div class="login-card animate-scale-in">
+            <h2 class="login-title">Welcome Back</h2>
+            <form method="post" novalidate>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn-primary">Login</button>
+            </form>
+            <p class="register-link">
+                Don't have an account?
+                <a href="{% url 'register' %}">Register</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Everything you need to get stuff done</h2>
+            <div class="features-grid">
+                <div class="feature-card animate-on-scroll" style="animation-delay: 0.1s">
+                    <div class="feature-icon animate-bounce">✅</div>
+                    <h4 class="feature-title">Task Management</h4>
+                    <p class="feature-desc">Create, organize, and prioritize your tasks with ease.</p>
+                </div>
+                <div class="feature-card animate-on-scroll" style="animation-delay: 0.2s">
+                    <div class="feature-icon animate-bounce">📅</div>
+                    <h4 class="feature-title">Due Dates & Reminders</h4>
+                    <p class="feature-desc">Set deadlines and get reminders to stay on top.</p>
+                </div>
+                <div class="feature-card animate-on-scroll" style="animation-delay: 0.3s">
+                    <div class="feature-icon animate-bounce">👥</div>
+                    <h4 class="feature-title">Collaboration</h4>
+                    <p class="feature-desc">Work together with teammates or family members.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Section -->
+    <section class="business-section">
+        <div class="container">
+            <h1 class="business-title animate-on-scroll">Empower Your Business with Taskly</h1>
+            <p class="business-subtitle animate-on-scroll" style="animation-delay: 0.2s">Streamline your team's workflow and boost productivity with our comprehensive business solutions.</p>
+        </div>
+    </section>
+
+    <!-- Business Features -->
+    <section class="business-features">
+        <div class="container">
+            <div class="business-features-grid">
+                <article class="business-feature-card animate-on-scroll" style="animation-delay: 0.1s">
+                    <h2 class="business-feature-title">Team Collaboration</h2>
+                    <p class="business-feature-desc">Effortlessly share projects, assign tasks, and communicate in real-time.</p>
+                </article>
+                <article class="business-feature-card animate-on-scroll" style="animation-delay: 0.2s">
+                    <h2 class="business-feature-title">Advanced Reporting</h2>
+                    <p class="business-feature-desc">Gain insights with detailed productivity and performance analytics.</p>
+                </article>
+                <article class="business-feature-card animate-on-scroll" style="animation-delay: 0.3s">
+                    <h2 class="business-feature-title">Admin Controls</h2>
+                    <p class="business-feature-desc">Manage permissions, templates, and data with advanced tools.</p>
+                </article>
+                <article class="business-feature-card animate-on-scroll" style="animation-delay: 0.4s">
+                    <h2 class="business-feature-title">Integrations</h2>
+                    <p class="business-feature-desc">Connect Taskly with your favorite business tools and services.</p>
+                </article>
+                <article class="business-feature-card animate-on-scroll" style="animation-delay: 0.5s">
+                    <h2 class="business-feature-title">Priority Support</h2>
+                    <p class="business-feature-desc">Get fast and reliable help from our dedicated support team.</p>
+                </article>
+                <article class="business-feature-card animate-on-scroll" style="animation-delay: 0.6s">
+                    <h2 class="business-feature-title">Custom Onboarding</h2>
+                    <p class="business-feature-desc">Receive personalized onboarding and training to get started quickly.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <h1 class="section-title animate-on-scroll">Meet Our Team</h1>
+            <div class="team-grid">
+                <!-- Team Member 1 -->
+                <div class="team-card animate-on-scroll" style="animation-delay: 0.1s">
+                    <div class="team-avatar">
+                        <img src="https://cdn.pixabay.com/photo/2024/03/27/16/06/ai-generated-8659385_1280.jpg" alt="Mohit" class="team-img-animate">
+                    </div>
+                    <h2 class="team-name">Mohit</h2>
+                    <p class="team-role">Technical Lead</p>
+                    <p class="team-bio">Mohit is a visionary software developer with vast experience...</p>
+                    <div class="team-links">
+                        <a href="https://github.com/alpha-3692/Project123" target="_blank">GitHub</a>
+                    </div>
+                </div>
+                <!-- Team Member 2 -->
+                <div class="team-card animate-on-scroll" style="animation-delay: 0.2s">
+                    <div class="team-avatar">
+                        <img src="https://i.pinimg.com/736x/0d/72/62/0d7262c6331581b747aea5e70a343fa2.jpg" alt="Aditya" class="team-img-animate">
+                    </div>
+                    <h2 class="team-name">Aditya</h2>
+                    <p class="team-role">Team Lead</p>
+                    <p class="team-bio">Aditya is a talented developer with a passion for UI.</p>
+                    <div class="team-links">
+                        <a href="https://github.com/alpha-3692/Project123" target="_blank">GitHub</a>
+                    </div>
+                </div>
+                <!-- Team Member 3 -->
+                <div class="team-card animate-on-scroll" style="animation-delay: 0.3s">
+                    <div class="team-avatar">
+                        <img src="https://cdn.pixabay.com/photo/2024/03/27/16/06/ai-generated-8659385_1280.jpg" alt="Hardik Chawla" class="team-img-animate">
+                    </div>
+                    <h2 class="team-name">Hardik Chawla</h2>
+                    <p class="team-role">Django Lead</p>
+                    <p class="team-bio">Hardik co-founded Taskly with focus on backend.</p>
+                    <div class="team-links">
+                        <a href="https://github.com/alpha-3692/Project123" target="_blank">GitHub</a>
+                    </div>
+                </div>
+                <!-- Team Member 4 -->
+                <div class="team-card animate-on-scroll" style="animation-delay: 0.4s">
+                    <div class="team-avatar">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOJWFwfzndBtCEsAHsZ_bwkC7pO6MmaVBJeQ&s" alt="Ishan" class="team-img-animate">
+                    </div>
+                    <h2 class="team-name">Ishan</h2>
+                    <p class="team-role">UI/UX Lead</p>
+                    <p class="team-bio">Ishan leads with creativity and intuitive design.</p>
+                    <div class="team-links">
+                        <a href="https://github.com/alpha-3692/Project123" target="_blank">GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Taskly. All rights reserved.</p>
+        </div>
+    </footer>
+</main>
+
+<style>
+/* Global Styles */
+.taskly-app {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f9fafb;
+    min-height: 100vh;
+    color: #333;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+a {
+    color: #3b82f6;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: #2563eb;
+}
+
+.section-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #1e293b;
+}
+
+.btn-primary {
+    display: block;
+    width: 100%;
+    padding: 0.9rem;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary:hover {
+    background-color: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+.btn-primary:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    20% {
+        transform: scale(25, 25);
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 0;
+        transform: scale(40, 40);
+    }
+}
+
+/* Hero Section */
+.hero {
+    padding: 8rem 1rem 6rem;
+    text-align: center;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    border-bottom: 1px solid #e5e7eb;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 30% 20%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
+    animation: pulse 15s infinite alternate;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 0.7;
+    }
+}
+
+.hero-title {
+    font-size: 3.25rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    position: relative;
+}
+
+.accent {
+    color: #3b82f6;
+    border-bottom: 4px solid #3b82f6;
+    padding-bottom: 4px;
+    position: relative;
+    display: inline-block;
+}
+
+.accent::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #3b82f6;
+    animation: width-pulse 3s infinite alternate;
+}
+
+@keyframes width-pulse {
+    0% {
+        opacity: 0.7;
+        transform: scaleX(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: #4b5563;
+    max-width: 700px;
+    margin: 0 auto 1.5rem;
+}
+
+.hero-tagline {
+    font-weight: 700;
+    color: #10b981;
+    letter-spacing: 0.05em;
+    font-size: 1.1rem;
+}
+
+/* Login Form */
+.login-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 1rem;
+    margin-top: -5rem;
+}
+
+.login-card {
+    background: white;
+    padding: 3rem 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    max-width: 420px;
+    width: 100%;
+    transform: translateY(0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e5e7eb;
+    position: relative;
+    z-index: 10;
+}
+
+.login-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.login-title {
+    text-align: center;
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+    color: #1e293b;
+}
+
+.login-card form p {
+    margin-bottom: 1.5rem;
+}
+
+.login-card form p label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #4b5563;
+}
+
+.login-card form p input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.login-card form p input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
+.register-link {
+    text-align: center;
+    margin-top: 2rem;
+    color: #6b7280;
+    font-size: 0.95rem;
+}
+
+/* Features Section */
+.features-section {
+    padding: 6rem 1rem;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.features-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.feature-card {
+    background: #f8fafc;
+    padding: 2.5rem 2rem;
+    border-radius: 12px;
+    transition: all 0.4s ease;
+    border: 1px solid #e5e7eb;
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+.feature-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #3b82f6, #60a5fa);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.feature-card:hover::after {
+    transform: scaleX(1);
+}
+
+.feature-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+
+.feature-title {
+    font-weight: 600;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: #1e293b;
+}
+
+.feature-desc {
+    font-size: 1rem;
+    color: #6b7280;
+}
+
+/* Business Section */
+.business-section {
+    padding: 7rem 2rem 4rem;
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.business-section::before,
+.business-section::after {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+}
+
+.business-section::before {
+    top: -150px;
+    left: -150px;
+}
+
+.business-section::after {
+    bottom: -150px;
+    right: -150px;
+}
+
+.business-title {
+    font-size: 2.75rem;
+    font-weight: 800;
+    color: #1e40af;
+    margin-bottom: 1.5rem;
+}
+
+.business-subtitle {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1.2rem;
+    color: #4b5563;
+}
+
+/* Business Features */
+.business-features {
+    padding: 5rem 2rem;
+    background-color: #f1f5f9;
+}
+
+.business-features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.business-feature-card {
+    background: white;
+    padding: 2.5rem 2rem;
+    border-radius: 12px;
+    transition: all 0.4s ease;
+    border: 1px solid #e5e7eb;
+    position: relative;
+    overflow: hidden;
+}
+
+.business-feature-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.business-feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.business-feature-card:hover::before {
+    opacity: 1;
+}
+
+.business-feature-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #1e293b;
+    position: relative;
+}
+
+.business-feature-desc {
+    color: #6b7280;
+    position: relative;
+}
+
+/* Team Section */
+.team-section {
+    padding: 7rem 2rem;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.team-section::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.team-card {
+    background: #f8fafc;
+    padding: 2.5rem 2rem;
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.4s ease;
+    border: 1px solid #e5e7eb;
+    position: relative;
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.team-avatar {
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.team-avatar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+    animation: pulse-ring 2s infinite;
+    opacity: 0;
+}
+
+.team-card:hover .team-avatar::after {
+    opacity: 1;
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.1;
+    }
+    100% {
+        transform: scale(1.1);
+        opacity: 0;
+    }
+}
+
+.team-avatar img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s ease;
+}
+
+.team-card:hover .team-avatar img {
+    transform: scale(1.05);
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+.team-name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #1e293b;
+}
+
+.team-role {
+    font-weight: 600;
+    color: #3b82f6;
+    margin-bottom: 1rem;
+}
+
+.team-bio {
+    font-size: 0.95rem;
+    color: #6b7280;
+    margin-bottom: 1.5rem;
+}
+
+.team-links a {
+    display: inline-block;
+    margin: 0 0.5rem;
+    font-weight: 500;
+    position: relative;
+}
+
+.team-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    transform-origin: right;
+}
+
+.team-links a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 3rem 0;
+    background: #f1f5f9;
+    font-size: 0.95rem;
+    color: #6b7280;
+    border-top: 1px solid #e5e7eb;
+}
+
+/* Animation Classes */
+.animate-fade-in {
+    animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.animate-slide-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUp 0.7s ease forwards;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-scale-in {
+    opacity: 0;
+    transform: scale(0.9);
+    animation: scaleIn 0.7s ease-out forwards;
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.animate-on-scroll.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.animate-bounce {
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.team-img-animate {
+    transition: all 0.5s ease;
+}
+
+.team-card:hover .team-img-animate {
+    transform: scale(1.05);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .login-card {
+        padding: 2.5rem 1.5rem;
+    }
+    
+    .section-title, 
+    .business-title {
+        font-size: 2rem;
+    }
+}
+
+/* Intersection Observer Script */
+</style>
+
+<!-- Add the JS for scroll animations -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Intersection Observer for scroll animations
+    const elements = document.querySelectorAll('.animate-on-scroll');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+    
+    elements.forEach(element => {
+        observer.observe(element);
+    });
+
+    // Ripple effect for buttons
+    const buttons = document.querySelectorAll('.btn-primary');
+    
+    buttons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            const x = e.clientX - e.target.getBoundingClientRect().left;
+            const y = e.clientY - e.target.getBoundingClientRect().top;
+            
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple-effect');
+            ripple.style.left = `${x}px`;
+            ripple.style.top = `${y}px`;
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+    });
+});
+</script>
+{% endblock %}
